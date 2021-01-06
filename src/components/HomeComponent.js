@@ -1,14 +1,27 @@
-import React from "react";
+import React, {Component} from "react";
+import "./cssFiles/home.css";
+import Header from "./HeaderComponent"
+import Footer from "./FooterComponent"
 
-function Home(props){
+class Home extends Component {
+    constructor(props){
+        super(props);
+        this.state={
+           
+        };
 
-    return(
-         <div className="container">
-            <p> Hiasdasdasdasdasdasd </p>
-        </div>
+    }
+    render(){
+        return(
 
-    );
+        <div className="">
+            <Header />
+            <Footer/>
+        </div>      
+              );
+    
 
+    }
 }
 
 export default Home;
