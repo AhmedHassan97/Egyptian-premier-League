@@ -27,12 +27,21 @@ class Signin extends Component {
   constructor(props) {
     super(props);
     this.state = {
-   
+      isSuccessful:false
     };
     this.handleSubmit = this.handleSubmit.bind(this);
 
   }
+  componentDidMount(){
+    this.props.resetSignInForm()
+    if(this.props.isSignedIn.isSignedIn===true){
 
+      alert("true")
+      this.setState({
+        isSuccessful: true
+      })
+    }
+  }
   handleSubmit(values) {
     // this.props.resetFeedbackForm();
     if (
@@ -48,8 +57,14 @@ class Signin extends Component {
      }
     }
   render() {
+    let redirect = null;
+    if (this.state.isSuccessful === true) {
+      alert("here")
+      redirect = <Redirect to="/home"></Redirect>;
+    }
     return (
       <div className="container signup">
+        {redirect}
         <div className="row somepadding">
           <Col xs={12} md={{ size: 6, offset: 5 }}>
             <Link to="/home">
@@ -127,7 +142,7 @@ class Signin extends Component {
                 <Col xs={12} md={{ size: 6, offset: 3 }}>
                   <Button model="submit" className="signupbtn" type="submit">
                     {/* <Button onClick={this.testbackend()} className="signupbtn"> */}
-                    SignUp
+                    SignIn
                   </Button>
                 </Col>
               </Row>

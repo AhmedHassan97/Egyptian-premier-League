@@ -1,3 +1,88 @@
 .mainPage{
     height: 500px;
 }
+.DateandTitle{
+    background-color: white;
+    display: grid;
+    grid-template-columns: 90% 10%;
+}
+.DateandTitleImage{
+    align-self: center;
+    padding-right: 4em;
+    width: 80%;
+    height: auto;
+}
+.DateandTitleHeader{
+    display: block;
+    font-size: 2.3rem;
+    line-height: 3rem;
+    float: left;
+    font-family: PremierSans-Bold,Arial,Helvetica Neue,Helvetica,sans-serif;
+}
+.BelowDateandTitle{
+    background-image: white;
+    display: grid;
+    grid-template-columns: 40% 45% 15%;
+    margin:0px;
+    border-top: 1px solid #c2c2c2;
+}
+
+.BelowDateandTitleFirst{
+    align-self: center;
+    padding-left: 2em;
+}
+.BelowDateandTitleFirstText{
+    font-family: PremierSans-Bold,Arial,Helvetica Neue,Helvetica,sans-serif;
+    font-weight: 400;
+    font-size: 1.7rem;
+}
+.BelowDateandTitleFirstImage{
+    align-self: center;
+    padding-right: 1em;
+    padding-left: 1em;
+    width:2em;
+    height: auto;
+}
+.BelowDateandTitleFirstTime{
+    font-weight: 400;
+    font-size: 1.3rem;
+    border: 1px solid #c2c2c2;
+    padding:0.5em;
+    padding-top:0.2em;
+    padding-bottom:0.2em;
+    background-color: white;
+}
+.BelowDateandTitleSecond{
+    border-radius: 10px;
+    line-height: 3rem;
+    align-self: center;
+    font-size: 1.3rem;
+    color: #2f2f2f;
+    font-family: PremierSans-Bold,Arial,Helvetica Neue,Helvetica,sans-serif;
+    font-weight: 400;
+    width:50%;
+}
+.BelowDateandTitleSecondImage{
+    align-self: center;
+    padding-right: 1em;
+    padding-left: 1em;
+    padding-top: 1em;
+    width: 1.7em;
+    height: auto;
+}
+.BelowDateandTitle:hover{
+    background-image: linear-gradient(to right, rgb(140, 0, 255) , rgb(255, 0, 149));
+    cursor: pointer;
+}
+.BelowDateandTitle:hover .BelowDateandTitleFirstText{
+    color:white;
+}
+.BelowDateandTitle:hover .BelowDateandTitleSecond{
+    color:white;
+}
+.bodyHome{
+    padding: 3em;
+}
+.cardPadding{
+    margin: 2px;
+}

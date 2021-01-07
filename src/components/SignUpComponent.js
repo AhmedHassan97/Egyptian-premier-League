@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-pascal-case */
 import React, { Component } from 'react';
 import {
   Col, Button, Row, Label, NavLink, ModalBody,Modal

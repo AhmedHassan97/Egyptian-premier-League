@@ -13,7 +13,8 @@
     adress VARCHAR(30),
     email VARCHAR(50) NOT NULL,
     rule BOOLEAN NOT NULL, 
-    approved BOOLEAN NOT NULL DEFAULT FALSE 
+    approved BOOLEAN NOT NULL DEFAULT FALSE,
+    adm BOOLEAN NOT NULL DEFAULT FALSE
 
     )";
     if ($conn->query($sql) === TRUE) {

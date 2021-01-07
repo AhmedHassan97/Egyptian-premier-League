@@ -1,8 +1,9 @@
 export const ADD_LOGIN="ADD_LOGIN";
 
-export const ADD_DISHES="ADD_DISHES";
-export const DISHES_LOADING="DISHES_LOADING";
-export const DISHES_FAILED="DISHES_FAILED";
+export const ADD_MATCHES="ADD_MATCHES";
+export const ADD_USERS="ADD_USERS";
+
+export const USERS_LOADING="USERS_LOADING";
 
 
 export const ADD_COMMENTS = 'ADD_COMMENTS';
