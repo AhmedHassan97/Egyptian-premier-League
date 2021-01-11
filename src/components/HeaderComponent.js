@@ -37,7 +37,7 @@ class Header extends Component {
     // }
     render(){
         return(
-          <div>
+          <div >
               {/* <NavbarHome /> */}
             <Navbar dark expand="md" className="headerClass">
                     <div className="container">
@@ -50,24 +50,47 @@ class Header extends Component {
                                 <span class="fa fa-home fa-lg"></span>Home
                             </NavLink>
                         </NavItem>
+                        
+                    </Nav>
+                    <Nav className="headerClass" navbar>
+                        {this.props.isSignedIn.isSignedIn == false ? (
+                            <div>
                         <NavItem>
-                            <NavLink className="nav-link" to="/home">
-                                <span class="fa fa-info fa-lg"></span>About Us
+                            <NavLink className="nav-link" to="/signin">
+                                <span class="fa fa-sign-in fa-lg"></span>Sign In
                             </NavLink>
                         </NavItem>
-                        <NavItem>
-                            <NavLink className="nav-link" to="/home">
-                                <span class="fa fa-address-card fa-lg"></span>Contact Us
-                            </NavLink>
-                        </NavItem>
+                            </div>
+                        ):(
+                            <div>
+                               
+                            </div>
+                        )}
+
                     </Nav>
                     <Nav className="ml-auto" navbar>
+                        {this.props.isSignedIn.isSignedIn == false ? (
+                            <div>
                         <NavItem>
-                        <NavLink className="nav-link" to="/signup">
+                            <NavLink className="nav-link" to="/signup">
                                 <span class="fa fa-sign-in fa-lg"></span>Sign up
-                        </NavLink>
+                            </NavLink>
                         </NavItem>
+                            </div>
+                        ):(
+                            <div style={{padding:'2px'}}>
+                                {this.props.isSignedIn.isSignedIn===true ? (
+                                    <div style={{color: 'white',padding:'2px'}}><span class="fa fa-user fa-lg"></span><b>{this.props.userstate.userstate.username}</b>
+                                    <button style={{margin:"5px",color:'white', backgroundColor:'black'}} onClick={()=>this.props.Logout()}><b>Logout</b></button>
+                                    </div>
+                                ):(
+                                    <div></div>
+                                )}
+                            </div>
+                        )}
+
                     </Nav>
+                    
                 </Collapse>
             </div>
             </Navbar>

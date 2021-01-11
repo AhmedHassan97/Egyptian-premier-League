@@ -11,15 +11,6 @@ import "./cssFiles/SignUp.css"
 
 const required = val => val && val.length;
 const minLength = len => val => val && val.length >= len;
-const validEmail = val => /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(val);
-const validDay = val => /^([1-9]|0[1-9]|[12]\d|3[01])$/i.test(val);
-const validYear = val =>
-  /^(181[2-9]|18[2-9]\d|19\d\d|2\d{3}|30[0-3]\d|304[0-8])$/i.test(val); //1812 - 3048
-const confEmail = val => val2 => val === val2;
-const typeSelected = val => val === "male" || val === "female";
-const roleSelected = val => val === "fan" || val === "manager";
-
-const monthSelected = val => val !== "null";
 
 
 
@@ -36,7 +27,6 @@ class Signin extends Component {
     this.props.resetSignInForm()
     if(this.props.isSignedIn.isSignedIn===true){
 
-      alert("true")
       this.setState({
         isSuccessful: true
       })
@@ -59,7 +49,6 @@ class Signin extends Component {
   render() {
     let redirect = null;
     if (this.state.isSuccessful === true) {
-      alert("here")
       redirect = <Redirect to="/home"></Redirect>;
     }
     return (

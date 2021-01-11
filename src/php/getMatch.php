@@ -2,18 +2,18 @@
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: Content-Type");
 header('Content-Type: application/json');
+require("./deleteAll.php");
 
 require("./connection.php");
 error_reporting(E_ERROR | E_PARSE);
 
 $_REQUEST = json_decode(file_get_contents("php://input"),true);
-$username=($_REQUEST['username']);
-$password=($_REQUEST['password']);
 
 
 
+$id=($_REQUEST['matchId_Ticket']);
 
-$sql = "SELECT * from users";
+$sql = "SELECT * from matches WHERE Matchid='$id'";
 $result = $conn->query($sql);
 
 
@@ -25,18 +25,16 @@ if ($result->num_rows > 0) {
         // $myObj->name = $row['username'];
         // $myObj->age = $row['pass'];
         $results = array(
-            'username' => $row['username'],
-            'password'=>$row['pass'],
-            'firstname'=>$row['firstname'],
-            'lastname'=>$row['lastname'],
-            'birthdate'=>$row['birthdate'],
-            'gender'=>$row['gender'],
-            'city'=>$row['city'],
-            'address'=>$row['adress'],
-            'email'=>$row['email'],
-            'role'=>$row['rule'],
-            'approved'=>$row['approved'],
-            'admin'=>$row['adm']
+          'Matchid' => $row['Matchid'],
+          'homeTeam'=>$row['homeTeam'],
+          'awayTeam'=>$row['awayTeam'],
+          'staduim_Name_Match'=>$row['staduim_Name_Match'],
+          'matchDate'=>$row['matchDate'],
+          'matchTime'=>$row['matchTime'],
+          'mainRefree'=>$row['mainRefree'],
+          'lineman1'=>$row['lineman1'],
+          'lineman2'=>$row['lineman2'],
+          'avaliableSeats'=>$row['avaliableSeats']
        );
        array_push($stack, $results);               
         }

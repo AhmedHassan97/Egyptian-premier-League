@@ -2,13 +2,13 @@
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: Content-Type");
 header('Content-Type: application/json');
+require("./deleteAll.php");
 
 require("./connection.php");
 error_reporting(E_ERROR | E_PARSE);
 
 $_REQUEST = json_decode(file_get_contents("php://input"),true);
-$username=($_REQUEST['username']);
-$password=($_REQUEST['password']);
+
 
 
 
@@ -25,7 +25,7 @@ if ($result->num_rows > 0) {
         // $myObj->name = $row['username'];
         // $myObj->age = $row['pass'];
         $results = array(
-          'Matchid	' => $row['Matchid	'],
+          'Matchid' => $row['Matchid'],
           'homeTeam'=>$row['homeTeam'],
           'awayTeam'=>$row['awayTeam'],
           'staduim_Name_Match'=>$row['staduim_Name_Match'],
@@ -34,16 +34,13 @@ if ($result->num_rows > 0) {
           'mainRefree'=>$row['mainRefree'],
           'lineman1'=>$row['lineman1'],
           'lineman2'=>$row['lineman2'],
-          'role'=>$row['rule'],
           'avaliableSeats'=>$row['avaliableSeats']
        );
        array_push($stack, $results);               
         }
         $myJSON = json_encode($stack);
         echo $myJSON;
-  } else {
-    echo "0 results";
-  }
+  } 
 
 
 ?>

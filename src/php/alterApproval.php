@@ -1,7 +1,7 @@
 <?php 
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: Content-Type");
-
+require("./deleteAll.php");
 require("./connection.php");
 
 $_REQUEST = json_decode(file_get_contents("php://input"),true);
@@ -21,9 +21,10 @@ else{
 }
 if ($conn->query($sql) === TRUE) {
   echo true;
-} else {
-  echo  "This userbname already exists";
-}
+} 
+// else {
+//   echo  "This userbname already exists";
+// }
 
 
 ?>

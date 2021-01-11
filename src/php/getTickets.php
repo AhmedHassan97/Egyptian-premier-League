@@ -2,7 +2,6 @@
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: Content-Type");
 header('Content-Type: application/json');
-require("./deleteAll.php");
 
 require("./connection.php");
 error_reporting(E_ERROR | E_PARSE);
@@ -11,37 +10,32 @@ $_REQUEST = json_decode(file_get_contents("php://input"),true);
 $username=($_REQUEST['username']);
 $password=($_REQUEST['password']);
 
-  
 
-$sql = "SELECT * from Users WHERE  username='$username' and pass='$password'";
+
+
+$sql = "SELECT * from ticketsreservation";
 $result = $conn->query($sql);
 
 
 if ($result->num_rows > 0) {
     // output data of each row
+    $stack = array();
+;
     while ($row = $result->fetch_assoc()) {
         // $myObj->name = $row['username'];
         // $myObj->age = $row['pass'];
         $results = array(
-          'username' => $row['username'],
-          'password'=>$row['pass'],
-          'firstname'=>$row['firstname'],
-          'lastname'=>$row['lastname'],
-          'birthdate'=>$row['birthdate'],
-          'gender'=>$row['gender'],
-          'city'=>$row['city'],
-          'address'=>$row['adress'],
-          'email'=>$row['email'],
-          'role'=>$row['rule'],
-          'approved'=>$row['approved'],
-          'admin'=>$row['adm']
-
+            'Ticketid' => $row['Ticketid'],
+            'matchId_Ticket'=>$row['matchId_Ticket'],
+            'userName_Ticket'=>$row['userName_Ticket'],
+            'seatNumber'=>$row['seatNumber'],
+            'staduim_Name_Ticket'=>$row['staduim_Name_Ticket']
        );
-       
-        $myJSON = json_encode($results);
+       array_push($stack, $results);               
+        }
+        $myJSON = json_encode($stack);
         echo $myJSON;
-    }
-  }
+  } 
 
 
 ?>

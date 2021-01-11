@@ -1,19 +1,23 @@
 export const ADD_LOGIN="ADD_LOGIN";
 
 export const ADD_MATCHES="ADD_MATCHES";
+export const MATCHES_LOADING = 'MATCHES_LOADING';
+
 export const ADD_USERS="ADD_USERS";
 
 export const USERS_LOADING="USERS_LOADING";
 
 
-export const ADD_COMMENTS = 'ADD_COMMENTS';
-export const COMMENTS_FAILED = 'COMMENTS_FAILED';
-export const PROMOS_LOADING = 'PROMOS_LOADING';
-export const ADD_PROMOS = 'ADD_PROMOS';
-export const PROMOS_FAILED = 'PROMOS_FAILED';
+export const GET_STADUIMS = 'GET_STADUIMS';
+export const GET_TEAMS = 'GET_TEAMS';
+export const STADUIMS_LOADING = 'STADUIMS_LOADING';
+export const TEAMS_LOADING = 'GET_TEAMS';
 
-export const LEADERS_LOADING = 'LEADERS_LOADING';
-export const ADD_LEADERS = 'ADD_LEADERS';
-export const PROMOS_LEADERS = 'PROMOS_LEADERS';
-export const LEADERS_FAILED = 'LEADERS_FAILED';
+export const EDIT_PROFILE = 'EDIT_PROFILE';
+export const EDIT_PROFILE_LOADING = 'EDIT_PROFILE_LOADING';
+
+
+export const TICKETS_LOADING = 'TICKETS_LOADING';
+export const GET_TICKETS = 'GET_TICKETS';
+export const ADD_LOGOUT = 'ADD_LOGOUT';
 

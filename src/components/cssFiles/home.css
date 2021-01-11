@@ -86,3 +86,12 @@
 .cardPadding{
     margin: 2px;
 }
+.editpadding{
+    padding: 1em;
+}
+.editButton{
+    color:#007bff;
+    border: 0em;
+    background-color: rgba(0,0,0,.03);
+    
+}

@@ -25,7 +25,9 @@
 // -----------------------------------------------------STADUIMS--------------------------------------    
     $sql = "CREATE TABLE Staduims (
         staduim_name VARCHAR(30) NOT NULL PRIMARY KEY,
-        approved BOOLEAN NOT NULL
+        approved BOOLEAN NOT NULL,
+        noOfRows int(6) NOT NULL,
+        seatsPerRow int(6) NOT NULL
         )";
 
     if ($conn->query($sql) === TRUE) {
@@ -54,7 +56,6 @@
         mainRefree VARCHAR(30) NOT NULL,
         lineman1 VARCHAR(30) NOT NULL,
         lineman2 VARCHAR(30) NOT NULL,
-        avaliableSeats INT(6) NOT NULL DEFAULT 30,
         CONSTRAINT f1_name FOREIGN KEY (homeTeam) REFERENCES Teams(team_name) ON DELETE CASCADE ON UPDATE CASCADE,
         CONSTRAINT f2_name FOREIGN KEY (awayTeam) REFERENCES Teams(team_name) ON DELETE CASCADE ON UPDATE CASCADE,
         CONSTRAINT f3_name FOREIGN KEY (staduim_Name_Match) REFERENCES Staduims(staduim_name) ON DELETE CASCADE ON UPDATE CASCADE,
