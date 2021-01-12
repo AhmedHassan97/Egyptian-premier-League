@@ -27,7 +27,10 @@ if ($result->num_rows > 0) {
         // $myObj->age = $row['pass'];
         $results = array(
             'staduimname' => $row['staduim_name'],
-            'approved' => $row['approved']
+            'approved' => $row['approved'],
+            'noOfRows' => $row['noOfRows'],
+            'seatsPerRow' => $row['seatsPerRow']
+
        );
        array_push($stack, $results);               
         }

@@ -8,7 +8,7 @@ import{actions} from "react-redux-form";
 import {postFeedback,SignInAction,GetUsers,PendRequest,GetMatches,GetStaduims,GetTeams,postMatch,postStad,EditMatch,EditProfile,GetTickets,ReserveOrDeleteTicket,Logout} from "../redux/ActionCreators"
 import SignUp from "./SignUpComponent"
 import Signin from "./SignInComponent"
-// import { ReserveTickets } from "./ReserveTickets";
+import ReserveTickets  from "./ReserveTickets";
 const mapStateToProps = state => {
   return {
     userstate:state.userstate,
@@ -99,7 +99,7 @@ class Main extends Component{
                 />}>
 
             </Route>
-            {/* <Route exact path="/reserve" component={()=>
+            <Route exact path="/reserve" component={()=>
                 <ReserveTickets isSignedIn={this.props.isSignedIn}
                                 userstate={this.props.userstate}
                                 matches={this.props.matches}
@@ -107,7 +107,7 @@ class Main extends Component{
                                 staduims={this.props.staduims}    
                                             />}>
 
-            </Route> */}
+            </Route>
             <Route exact path="/signin" component={()=>
                 <Signin resetSignInForm={this.props.resetSignInForm}
                         SignInAction={this.props.SignInAction}

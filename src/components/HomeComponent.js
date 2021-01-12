@@ -43,6 +43,8 @@ class Home extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleEditMatch = this.handleEditMatch.bind(this);
     this.handleEditProfile = this.handleEditProfile.bind(this);
+    this.handleSeatsRender = this.handleSeatsRender.bind(this);
+
     }
 
     componentDidMount()
@@ -76,7 +78,8 @@ class Home extends Component {
           stadname:values.stadname,
           approved:values.app,
           seatsPerRow:values.seatsPerRow,
-          noOfRows:values.noOfRows
+          noOfRows:values.noOfRows,
+          load:false
   
         }
         this.props.postStad(obj);
@@ -160,7 +163,7 @@ class Home extends Component {
           staduim_Name_Ticket:this.state.match.staduim_Name_Match,
           reserve:true
         }
-        alert(id)
+        // alert(id)
         this.props.ReserveOrDeleteTicket(obj)
         const newTooltip = `tooltip for id-${id} added by callback`
         addCb(row, number, id, newTooltip)
@@ -186,6 +189,77 @@ class Home extends Component {
         removeCb(row, number, newTooltip)
         this.setState({ loading: false })
       })
+    }
+    handleSeatsRender(match){
+      // alert("hellow")
+      this.setState({
+        match:match,
+        load:false
+      },async()=>
+      {
+        var noOfRows=0
+        var noOfCols=0
+        this.props.staduims.staduims.map((stad)=>{
+          if(this.state.match.staduim_Name_Match === stad.staduimname)
+          {
+            // console.log("1")
+            noOfRows=stad.noOfRows
+            noOfCols=stad.seatsPerRow
+
+          }
+        })
+        var allrows = new Array(parseInt( noOfRows));
+        
+        for (var i = 0; i < parseInt(noOfRows); i++) {
+          // console.log(noOfCols)
+          allrows[i] = new Array(parseInt( noOfCols));
+          allrows[i].length=0
+        } 
+        // console.log("Allrows",allrows);
+        // console.log("2")
+        // for (const outElem of allrows) {
+        //   // console.log('======== outter ========');
+        //   for (const inElem of outElem) {
+        //     // alert(inElem)
+        //     inElem.push({id: seatnumber, number: seatnumber,isReserved:false})
+        //     seatnumber++
+        //   }
+        // }
+        var seatnumber=1;
+
+        for (let index = 0; index < parseInt(noOfRows); index++) {
+          for( let j =0; j < parseInt(noOfCols); j++){
+            // console.log("2")
+            allrows[index].push({id: seatnumber, number: seatnumber,isReserved:false})
+            seatnumber++
+          }
+          
+        }
+        
+        // console.log("Allrows",allrows);
+        this.props.tickets.tickets.map((ticket)=>{
+          if (this.state.match.Matchid === ticket.matchId_Ticket) {
+            // alert("match occur")
+            for (const outElem of allrows) {
+              // console.log('======== outter ========');
+              for (const inElem of outElem) {
+                // alert(inElem)
+                if (ticket.seatNumber == inElem.id ) {
+                  // alert(true)
+                  inElem.isReserved=true
+                }
+              }
+            }
+          }
+          console.log("Allrows",allrows);
+        })
+        console.log(allrows)
+        this.setState({
+          rows:allrows
+        })
+      }
+
+      )
     }
     handleCancelReservation(seatnumber,username,stad,matchid){
       const obj={
@@ -736,41 +810,14 @@ class Home extends Component {
               
           })
         }
-      var allrows=
-      []
+      // var allrows=
+      // []
       
-      const rows = ()=> {
-        allrows=
-      [
-      [{id: 1, number: 1,isReserved:true}, {id: 2, number: 2,isReserved:false}, {id: 3, number: '3',isReserved:false}, {id: 4, number: '4',isReserved:false},  {id: 5, number: 5,isReserved:false}, {id: 6, number: 6,isReserved:false}],
-      [{id: 7, number: 1,isReserved:false}, {id: 8, number: 2,isReserved:false}, {id: 9, number: '3',isReserved:false}, {id: 10, number: '4',isReserved:false},  {id: 11, number: 5,isReserved:false}, {id: 12, number: 6,isReserved:false}],
-      [{id: 7, number: 1,isReserved:false}, {id: 8, number: 2,isReserved:false},  {id: 9, number: '3',isReserved:false}, {id: 10, number: '4',isReserved:false},  {id: 11, number: 5,isReserved:false}, {id: 12, number: 6,isReserved:false}],
-      [{id: 13, number: 1,isReserved:false}, {id: 14, number: 2,isReserved:false},  {id: 15, number: 3,isReserved:false}, {id: 16, number: '4',isReserved:false},  {id: 17, number: 5,isReserved:false}, {id: 18, number: 6,isReserved:false}],
-      [{id: 19, number: 1,isReserved:false}, {id: 20, number: 2,isReserved:false},  {id: 21, number: 3,isReserved:false}, {id: 22, number: '4',isReserved:false}, {id: 23, number: 5,isReserved:false}, {id: 24, number: 6,isReserved:false}],
-      [{id: 25, number: 1,isReserved:false}, {id: 26, number: 2,isReserved:false},  {id: 27, number:'3',isReserved:false}, {id: 28, number: '4',isReserved:false}, {id: 29, number: 5,isReserved:false}, {id: 30, number: 6,isReserved:false}]
-    ]
-        this.props.tickets.tickets.map((ticket)=>{
-          if (this.state.match.Matchid === ticket.matchId_Ticket) {
-            // alert("match occur")
-            for (const outElem of allrows) {
-              // console.log('======== outter ========');
-              for (const inElem of outElem) {
-                // alert(inElem)
-                if (ticket.seatNumber == inElem.id ) {
-                  // alert(true)
-                  inElem.isReserved=true
-                }
-              }
-            }
-          }
-          console.log("Allrows",allrows);
-        })
-        return allrows
-      }
+      
         
-        var addRows=(Matchid)=>{
+        // var addRows=(Matchid)=>{
           
-        }
+        // }
         const {loading} = this.state
         var AddMatch = () => {
             return(
@@ -1061,7 +1108,7 @@ class Home extends Component {
                               <Card>
                               <Card.Header>
                                 <Accordion.Toggle as={Button} variant="link" eventKey="2">
-                                  <button className="editButton" onClick={()=>this.setState({match:match})}>
+                                  <button className="editButton" onClick={()=>this.handleSeatsRender(match)}>
                                     <h5>Reserve Tickets for this match</h5>
                                   </button>
                                 </Accordion.Toggle>
@@ -1072,10 +1119,15 @@ class Home extends Component {
                                 <div>  
                                     <h1>Seat Picker</h1>
                                     <div style={{marginTop: '100px'}}>
+                                      <button onClick={()=>this.setState({load:true})}>Load Seats</button>
+                                      {
+                                        this.state.load === true ?
+                                        (
+                                          <div>
                                       <SeatPicker
                                         addSeatCallback={this.addSeatCallback}
                                         removeSeatCallback={this.removeSeatCallback}
-                                        rows={rows()}
+                                        rows={this.state.rows}
                                         maxReservableSeats={3}
                                         alpha
                                         visible
@@ -1083,6 +1135,13 @@ class Home extends Component {
                                         loading={loading}
                                         // tooltipProps={{multiline: true}}
                                       />
+                                      </div>
+                                        ):
+                                        (
+                                          <div></div>
+                                        )
+                                      }
+                                      
                                     </div>
                                 </div>
                                 </Card.Body>

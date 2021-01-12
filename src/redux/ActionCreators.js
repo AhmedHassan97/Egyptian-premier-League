@@ -302,6 +302,18 @@ export const postFeedback = (
           console.log(error);
         });  
       }
+      else{
+        axios
+            .post(`${baseUrl}/reserveTicket.php`,newFeedback)
+            .then((response) => {
+              alert(( response.request.responseText))
+              dispatch(GetTickets())
+          }
+            )
+            .catch((error) => {
+              console.log(error);
+            });
+      }
      
 };
  /////////////////////////////////////////////////////////////////////Logout/////////////////////////////////////////////////

@@ -33,8 +33,7 @@ if ($result->num_rows > 0) {
           'matchTime'=>$row['matchTime'],
           'mainRefree'=>$row['mainRefree'],
           'lineman1'=>$row['lineman1'],
-          'lineman2'=>$row['lineman2'],
-          'avaliableSeats'=>$row['avaliableSeats']
+          'lineman2'=>$row['lineman2']
        );
        array_push($stack, $results);               
         }
