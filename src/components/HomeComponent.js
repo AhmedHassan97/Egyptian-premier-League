@@ -136,8 +136,8 @@ class Home extends Component {
       this.props.resetEditMatchForm();
     }
     handleEditProfile(values){
-      alert(this.props.userstate.userstate.username)
-      alert(values.email)
+      // alert(this.props.userstate.userstate.username)
+      // alert(values.email)
       const form={
         username:this.props.userstate.userstate.username,
         password:values.password,
@@ -282,11 +282,16 @@ class Home extends Component {
         ReservedTickets=this.props.tickets.tickets.map((ticket)=>{
               if(ticket.userName_Ticket === this.props.userstate.userstate.username){
                   return(
-                  
                       <Card className="cardPadding">
                           <Card.Header> <b>User Name:</b> {ticket.userName_Ticket}</Card.Header>
                           <Card.Body>
-                              <Card.Title>{ticket.staduim_Name_Ticket} </Card.Title>
+                            {this.props.matches.matches.map((match)=>{
+                              if (match.Matchid === ticket.matchId_Ticket) {
+                                return(
+                                  <Card.Title>{match.homeTeam}<b style={{color:'red'}}> VS </b>{match.awayTeam} <b style={{color:'red'}}> At </b>{ticket.staduim_Name_Ticket} <b style={{color:'red'}} className='ml-auto'><i class="fa fa-calendar"></i>{match.matchDate} </b></Card.Title>
+                                )
+                              }
+                            })}
                               <Button className="cardPadding" variant="danger" onClick={()=>this.handleCancelReservation(ticket.seatNumber,ticket.userName_Ticket,ticket.staduim_Name_Ticket,ticket.matchId_Ticket)}>Cancel Reservation</Button>
                           </Card.Body>
                       </Card>
@@ -1041,13 +1046,13 @@ class Home extends Component {
                             </h3>
                             <img class="DateandTitleImage" src="https://upload.wikimedia.org/wikipedia/en/thumb/f/f2/Premier_League_Logo.svg/1200px-Premier_League_Logo.svg.png"/>              
                         </div>
-                        <div type="button" onclick="alert('Hello world!')" class="BelowDateandTitle" >
+                        <div type="button"  class="BelowDateandTitle" >
                             <div class="BelowDateandTitleFirst">
                                 <span class="BelowDateandTitleFirstText">{match.homeTeam}</span>
                                 <span>
                                     <img class="BelowDateandTitleFirstImage" src="https://upload.wikimedia.org/wikipedia/en/thumb/7/7a/Manchester_United_FC_crest.svg/1200px-Manchester_United_FC_crest.svg.png"/>  
                                 </span>
-                                <span class="BelowDateandTitleFirstTime">
+                                <span class="BelowDateandTitleFirstTime" style={{color:'black'}}>
                                     {match.matchTime}
                                 </span>
                                 <span>

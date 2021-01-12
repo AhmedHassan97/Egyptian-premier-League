@@ -17,8 +17,8 @@ export const postFeedback = (
           alert("Congratulation, now go to the Sign in Page to Sign In")
           dispatch(GetUsers());
         }
-        else
-          alert(response.request.responseText)
+        // else
+        //   alert(response.request.responseText)
       }) 
       .catch((error) => {
         console.log(error);
@@ -199,7 +199,7 @@ export const postFeedback = (
       axios
         .post(`${baseUrl}/addStad.php`,newFeedback)
         .then((response) => { dispatch(GetStaduims());  
-          alert(response.request.responseText)  
+          // alert(response.request.responseText)  
 
         }) 
         .catch((error) => {
@@ -215,7 +215,7 @@ export const postFeedback = (
     axios
       .post(`${baseUrl}/alterMatch.php`,newFeedback)
       .then((response) => {
-           alert(response.request.responseText)  
+          //  alert(response.request.responseText)  
            dispatch(GetMatches())       
            
       }) 
@@ -285,7 +285,7 @@ export const postFeedback = (
             axios
             .post(`${baseUrl}/reserveTicket.php`,newFeedback)
             .then((response) => {
-              alert(( response.request.responseText))
+              // alert(( response.request.responseText))
               dispatch(GetTickets())
           }
             )
@@ -306,7 +306,7 @@ export const postFeedback = (
         axios
             .post(`${baseUrl}/reserveTicket.php`,newFeedback)
             .then((response) => {
-              alert(( response.request.responseText))
+              // alert(( response.request.responseText))
               dispatch(GetTickets())
           }
             )

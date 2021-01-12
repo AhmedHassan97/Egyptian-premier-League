@@ -20,11 +20,14 @@
     font-family: PremierSans-Bold,Arial,Helvetica Neue,Helvetica,sans-serif;
 }
 .BelowDateandTitle{
-    background-image: white;
+    /* background-image: white; */
     display: grid;
     grid-template-columns: 40% 45% 15%;
     margin:0px;
     border-top: 1px solid #c2c2c2;
+    background-image: linear-gradient(to right, rgb(140, 0, 255) , rgb(255, 0, 149));
+    color: white;
+
 }
 
 .BelowDateandTitleFirst{
@@ -61,6 +64,7 @@
     font-family: PremierSans-Bold,Arial,Helvetica Neue,Helvetica,sans-serif;
     font-weight: 400;
     width:50%;
+    color: white;
 }
 .BelowDateandTitleSecondImage{
     align-self: center;
@@ -69,6 +73,7 @@
     padding-top: 1em;
     width: 1.7em;
     height: auto;
+    
 }
 .BelowDateandTitle:hover{
     background-image: linear-gradient(to right, rgb(140, 0, 255) , rgb(255, 0, 149));
