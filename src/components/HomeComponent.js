@@ -5,7 +5,7 @@ import Footer from "./FooterComponent"
 import {Tabs,Tab,Card,Button,Accordion,ListGroup,ListGroupItem,Carousel} from "react-bootstrap"
 import {Loading} from "./LoadingComponent"
 import {
-Col, Row, Label, NavLink, ModalBody,Modal
+Col, Row, Label
 } from 'reactstrap';
 import {
 Control, Form, Errors,
@@ -18,11 +18,6 @@ import { baseUrl } from '../redux/baseUrl';
 
 
 const required = val => val && val.length;
-const minLength = len => val => val && val.length >= len;
-const validEmail = val => /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(val);
-const validDay = val => /^([1-9]|0[1-9]|[12]\d|3[01])$/i.test(val);
-const validYear = val =>
-/^(181[2-9]|18[2-9]\d|19\d\d|2\d{3}|30[0-3]\d|304[0-8])$/i.test(val) || ""; //1812 - 3048
 const TeamSelected = val => val !== "null";
 const TeamSelected2 = val => val !== "null";
 const TeamSelected3 = val => val !== "null";
@@ -37,8 +32,10 @@ class Home extends Component {
             loading:false,
             match:[],
             rows:[],
-            time:0
-        };
+            time:0,
+            load:false,
+            isSuccessful:false,
+          };
     this.handleSelect = this.handleSelect.bind(this);
     this.handleApproval = this.handleApproval.bind(this);
     this.handleDisapproval = this.handleDisapproval.bind(this);
@@ -48,34 +45,34 @@ class Home extends Component {
     this.handleSeatsRender = this.handleSeatsRender.bind(this);
 
     }
-     GetTickets = (
-      )  => {
-        axios
-          .get(`${baseUrl}/getTickets.php`)
-          .then((response) => {
-            if (_.isEqual(this.props.tickets.tickets, JSON.parse( response.request.responseText))) {
-            }
-            else if(this.state.key == 2){
-              alert("Another User changed his Reservation")
-              this.props.GetTickets()
-            }
-            
-        }
-          )
-          .catch((error) => {
-            console.log(error);
-          });
-      };
-    componentWillUnmount() {
-      clearInterval(this.interval);
+  
+    //  GetTickets = (
+    //   )  => {
+    //     axios
+    //       .get(`${baseUrl}/getTickets.php`)
+    //       .then((response) => {
+    //         if (_.isEqual(this.props.tickets.tickets, JSON.parse( response.request.responseText))) {
+    //         }
+    //         else if(this.state.key == 2){
+    //           alert("Another User changed his Reservation")
+    //           this.props.GetTickets()
+    //         }
+    //     }
+    //       )
+    //       .catch((error) => {
+    //         console.log(error);
+    //       });
+    //   };
+    // componentWillUnmount() {
+    //   clearInterval(this.interval);
 
-    }
-    componentDidMount()
-    {
-      // this.props.resetAddStadForm()
-      this.interval = setInterval(() => this.GetTickets(), 1000);
+    // }
+    // componentDidMount()
+    // {
+    //   // this.props.resetAddStadForm()
+    //   this.interval = setInterval(() => this.GetTickets(), 1000);
 
-    }
+    // }
     handleSubmit(values) {
       // alert(values.time)
       const date=new Date(values.day,values.month,values.year)
@@ -216,75 +213,71 @@ class Home extends Component {
       })
     }
     handleSeatsRender(match){
-      alert(this.state.key)
+      
       this.setState({
-        match:match,
-        load:false
-      },async()=>
-      {
-        var noOfRows=0
-        var noOfCols=0
-        this.props.staduims.staduims.map((stad)=>{
-          if(this.state.match.staduim_Name_Match === stad.staduimname)
-          {
-            // console.log("1")
-            noOfRows=stad.noOfRows
-            noOfCols=stad.seatsPerRow
+        isSuccessful: true
+      },async()=>{
+        this.props.AddSingleMatch(match)
+      })
+      // alert(this.state.key)
+      // this.setState({
+      //   match:match,
+      //   load:false
+      // },async()=>
+      // {
+      //   var noOfRows=0
+      //   var noOfCols=0
+      //   this.props.staduims.staduims.map((stad)=>{
+      //     if(this.state.match.staduim_Name_Match === stad.staduimname)
+      //     {
+      //       // console.log("1")
+      //       noOfRows=stad.noOfRows
+      //       noOfCols=stad.seatsPerRow
 
-          }
-        })
-        var allrows = new Array(parseInt( noOfRows));
+      //     }
+      //   })
+      //   var allrows = new Array(parseInt( noOfRows));
         
-        for (var i = 0; i < parseInt(noOfRows); i++) {
-          // console.log(noOfCols)
-          allrows[i] = new Array(parseInt( noOfCols));
-          allrows[i].length=0
-        } 
-        // console.log("Allrows",allrows);
-        // console.log("2")
-        // for (const outElem of allrows) {
-        //   // console.log('======== outter ========');
-        //   for (const inElem of outElem) {
-        //     // alert(inElem)
-        //     inElem.push({id: seatnumber, number: seatnumber,isReserved:false})
-        //     seatnumber++
-        //   }
-        // }
-        var seatnumber=1;
+      //   for (var i = 0; i < parseInt(noOfRows); i++) {
+      //     // console.log(noOfCols)
+      //     allrows[i] = new Array(parseInt( noOfCols));
+      //     allrows[i].length=0
+      //   } 
+      //   var seatnumber=1;
 
-        for (let index = 0; index < parseInt(noOfRows); index++) {
-          for( let j =0; j < parseInt(noOfCols); j++){
-            // console.log("2")
-            allrows[index].push({id: seatnumber, number: seatnumber,isReserved:false})
-            seatnumber++
-          }
+      //   for (let index = 0; index < parseInt(noOfRows); index++) {
+      //     for( let j =0; j < parseInt(noOfCols); j++){
+      //       // console.log("2")
+      //       allrows[index].push({id: seatnumber, number: seatnumber,isReserved:false})
+      //       seatnumber++
+      //     }
           
-        }
+      //   }
         
-        // console.log("Allrows",allrows);
-        this.props.tickets.tickets.map((ticket)=>{
-          if (this.state.match.Matchid === ticket.matchId_Ticket) {
-            // alert("match occur")
-            for (const outElem of allrows) {
-              // console.log('======== outter ========');
-              for (const inElem of outElem) {
-                // alert(inElem)
-                if (ticket.seatNumber == inElem.id ) {
-                  // alert(true)
-                  inElem.isReserved=true
-                }
-              }
-            }
-          }
-          console.log("Allrows",allrows);
-        })
-        console.log(allrows)
-        this.setState({
-          rows:allrows
-        })
-      }
+      //   // console.log("Allrows",allrows);
+      //   this.props.tickets.tickets.map((ticket)=>{
+      //     if (this.state.match.Matchid === ticket.matchId_Ticket) {
+      //       // alert("match occur")
+      //       for (const outElem of allrows) {
+      //         // console.log('======== outter ========');
+      //         for (const inElem of outElem) {
+      //           // alert(inElem)
+      //           if (ticket.seatNumber == inElem.id ) {
+      //             // alert(true)
+      //             inElem.isReserved=true
+      //           }
+      //         }
+      //       }
+      //     }
+      //     console.log("Allrows",allrows);
+      //   })
+      //   console.log(allrows)
+      //   this.setState({
+      //     rows:allrows
+      //   })
+      // }
 
-      )
+      // )
     }
     handleCancelReservation(seatnumber,username,stad,matchid){
       const obj={
@@ -298,6 +291,10 @@ class Home extends Component {
         this.props.ReserveOrDeleteTicket(obj)
     }
     render(){
+      let redirect = null;
+      if (this.state.isSuccessful === true) {
+        redirect = <Redirect to="/reserve"></Redirect>;
+      }
             /////////////////////////////////////////////////////////////cancel reservation//////////////////////////////////////////////////////////////
       var ReservedTickets=null;
       if (this.props.tickets.isLoading===true) {
@@ -840,14 +837,7 @@ class Home extends Component {
               
           })
         }
-      // var allrows=
-      // []
-      
-      
-        
-        // var addRows=(Matchid)=>{
-          
-        // }
+   
         const {loading} = this.state
         var AddMatch = () => {
             return(
@@ -1146,10 +1136,11 @@ class Home extends Component {
                               <Accordion.Collapse eventKey="2">
                                 <Card.Body>
                                   
-                                <div>  
+                                {/* <div>  
                                     <h1>Seat Picker</h1>
                                     <div style={{marginTop: '100px'}}>
                                       <button onClick={()=>this.setState({load:true})}>Load Seats</button>
+                                      <button onClick={()=>this.setState({load:false})}> Unload Seats</button>
                                       {
                                         this.state.load === true ?
                                         (
@@ -1173,7 +1164,7 @@ class Home extends Component {
                                       }
                                       
                                     </div>
-                                </div>
+                                </div> */}
                                 </Card.Body>
                               </Accordion.Collapse>
                             </Card>
@@ -1247,6 +1238,7 @@ class Home extends Component {
         return(
 
         <div>
+            {redirect}
             <Header userstate={this.props.userstate}
                     isSignedIn={this.props.isSignedIn}
                     Logout={this.props.Logout}

@@ -2,13 +2,14 @@ import {createStore, combineReducers, applyMiddleware } from 'redux';
 import {createForms} from "react-redux-form"
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
-import {InitialSignup,InitialSignIn,InitialAddMatch,InitialAddNewStad,InitialEditProfile} from "./forms"
+import {InitialSignup,InitialSignIn,InitialAddMatch,InitialAddNewStad,InitialEditProfile,InitialReservation} from "./forms"
 import {SignedInState,UserState} from "./userState"
 import {Matches} from "./matches"
 import {Users} from "./users"
 import { Teams } from "./teams";
 import { Staduims } from "./staduims";
 import { Tickets } from "./tickets";
+import { Match } from './addSingleMatch';
 function saveState(state) {
     try {
       const serializedState = JSON.stringify(state);
@@ -38,6 +39,7 @@ export const ConfigureStore = () => {
             staduims:Staduims,
             teams:Teams,
             tickets:Tickets,
+            match:Match,
         // playlist_BE:PlayList_BE,
         ...createForms({
             signup:InitialSignup,
@@ -45,7 +47,8 @@ export const ConfigureStore = () => {
             addmatch:InitialAddMatch,
             addstad:InitialAddNewStad,
             editmatch:InitialAddMatch,
-            editprofile:InitialEditProfile
+            editprofile:InitialEditProfile,
+            ticketreservation:InitialReservation
         }),
       }),
       persistState,

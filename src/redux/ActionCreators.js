@@ -331,4 +331,16 @@ export const postFeedback = (
 export const logout = () => ({
   type: ActionTypes.ADD_LOGOUT
 });
-  
+////////////////////////////////////////////////////////// Add single match /////////////////////////////////////
+export const AddSingleMatch = (
+  match) => (dispatch) => {
+  dispatch(matchLoading())
+   dispatch(addMatch(match))
+};
+export const addMatch = (data) => ({
+  type: ActionTypes.ADD_MATCH,
+  payload: data
+});
+export const matchLoading = () => ({
+  type: ActionTypes.MATCH_LOADING
+});

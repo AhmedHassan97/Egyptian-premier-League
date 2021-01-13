@@ -21,3 +21,5 @@ export const TICKETS_LOADING = 'TICKETS_LOADING';
 export const GET_TICKETS = 'GET_TICKETS';
 export const ADD_LOGOUT = 'ADD_LOGOUT';
 
+export const ADD_MATCH="ADD_MATCHE";
+export const MATCH_LOADING = 'MATCH_LOADING';

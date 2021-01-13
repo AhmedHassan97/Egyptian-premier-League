@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { TransitionGroup } from 'react-transition-group';
 import Home from "./HomeComponent";
 import{actions} from "react-redux-form";
-import {postFeedback,SignInAction,GetUsers,PendRequest,GetMatches,GetStaduims,GetTeams,postMatch,postStad,EditMatch,EditProfile,GetTickets,ReserveOrDeleteTicket,Logout} from "../redux/ActionCreators"
+import {postFeedback,SignInAction,GetUsers,PendRequest,GetMatches,GetStaduims,GetTeams,postMatch,postStad,EditMatch,EditProfile,GetTickets,ReserveOrDeleteTicket,Logout,AddSingleMatch} from "../redux/ActionCreators"
 import SignUp from "./SignUpComponent"
 import Signin from "./SignInComponent"
 import ReserveTickets  from "./ReserveTickets";
@@ -17,7 +17,8 @@ const mapStateToProps = state => {
     teams:state.teams,
     staduims:state.staduims,
     matches:state.matches,
-    tickets:state.tickets
+    tickets:state.tickets,
+    match:state.match
   }
 }
 const mapDispatchToProps = dispatch => ({
@@ -27,6 +28,7 @@ const mapDispatchToProps = dispatch => ({
   resetAddStadForm: () => { dispatch(actions.reset('addstad'))},
   resetEditMatchForm: () => { dispatch(actions.reset('editmatch'))},
   resetEditProfileForm: () => { dispatch(actions.reset('editprofile'))},
+  resetReservatioForm: () => { dispatch(actions.reset('ticketreservation'))},
 
   postFeedback:          (object) => dispatch(postFeedback(object)),
   SignInAction:          (object) =>dispatch(SignInAction(object)),
@@ -42,6 +44,8 @@ const mapDispatchToProps = dispatch => ({
   GetTickets:            (obj) =>dispatch(GetTickets(obj)),
   ReserveOrDeleteTicket: (obj) =>dispatch(ReserveOrDeleteTicket(obj)),
   Logout:                (obj) =>dispatch(Logout(obj)),
+  AddSingleMatch:                (obj) =>dispatch(AddSingleMatch(obj)),
+
   
   
 });
@@ -61,6 +65,7 @@ class Main extends Component{
     this.props.resetAddStadForm();
     this.props.resetEditMatchForm();
     this.props.resetEditProfileForm();
+    this.props.resetReservatioForm();
   }
   render(){
   return (
@@ -90,6 +95,8 @@ class Main extends Component{
                         Logout={this.props.Logout}
                         resetAddStadForm={this.props.resetAddStadForm}
                         GetTickets={this.props.GetTickets}
+                        match={this.props.match}
+                        AddSingleMatch={this.props.AddSingleMatch}
 
                 />}>
 
@@ -97,6 +104,7 @@ class Main extends Component{
             <Route exact path="/signup" component={()=>
                 <SignUp resetFeedbackForm={this.props.resetSignUpForm}
                         postFeedback={this.props.postFeedback}
+
                 />}>
 
             </Route>
@@ -105,9 +113,15 @@ class Main extends Component{
                                 userstate={this.props.userstate}
                                 matches={this.props.matches}
                                 teams={this.props.teams}
-                                staduims={this.props.staduims}    
-                                            />}>
+                                staduims={this.props.staduims}
+                                match={this.props.match} 
+                                tickets={this.props.tickets}
+                                ReserveOrDeleteTicket={this.props.ReserveOrDeleteTicket}
+                                Logout={this.props.Logout}
+                                resetReservatioForm={this.props.resetReservatioForm}
 
+
+                                />}>
             </Route>
             <Route exact path="/signin" component={()=>
                 <Signin resetSignInForm={this.props.resetSignInForm}

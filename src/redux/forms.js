@@ -43,3 +43,8 @@ export const InitialSignup = {
     sex: "",
     date:""
   };
+
+  export const InitialReservation = {
+    creditcardnumber:"",
+    pin:""
+  };
