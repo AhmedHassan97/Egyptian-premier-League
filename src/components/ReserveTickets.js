@@ -8,12 +8,11 @@ import { Jumbotron,Row,Col} from 'reactstrap';
 import "./cssFiles/reserveTickets.css"
 import Footer from "./FooterComponent"
 import {
-   Button,  Label
+   Button
 } from 'reactstrap';
 import {
   Control, Form, Errors
 } from 'react-redux-form';
-import { Link } from 'react-router-dom';
 import "./cssFiles/SignUp.css"
 import { Navbar , NavbarBrand, Nav,NavItem,NavbarToggler,Collapse} from 'reactstrap'; 
 import {NavLink} from "react-router-dom";
@@ -165,7 +164,10 @@ class ReserveTickets extends Component{
               console.log("4")
               this.setState({
                 rows:allrows,
-                load:true
+                load:true,
+                totalCost:0,
+                seats:[]
+
               })
               
                 })

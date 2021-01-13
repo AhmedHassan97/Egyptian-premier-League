@@ -42,37 +42,9 @@ class Home extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleEditMatch = this.handleEditMatch.bind(this);
     this.handleEditProfile = this.handleEditProfile.bind(this);
-    this.handleSeatsRender = this.handleSeatsRender.bind(this);
 
     }
-  
-    //  GetTickets = (
-    //   )  => {
-    //     axios
-    //       .get(`${baseUrl}/getTickets.php`)
-    //       .then((response) => {
-    //         if (_.isEqual(this.props.tickets.tickets, JSON.parse( response.request.responseText))) {
-    //         }
-    //         else if(this.state.key == 2){
-    //           alert("Another User changed his Reservation")
-    //           this.props.GetTickets()
-    //         }
-    //     }
-    //       )
-    //       .catch((error) => {
-    //         console.log(error);
-    //       });
-    //   };
-    // componentWillUnmount() {
-    //   clearInterval(this.interval);
 
-    // }
-    // componentDidMount()
-    // {
-    //   // this.props.resetAddStadForm()
-    //   this.interval = setInterval(() => this.GetTickets(), 1000);
-
-    // }
     componentDidMount(){
       this.props.resetAddStadForm()
       this.props.resetAddMatchForm();
@@ -176,113 +148,6 @@ class Home extends Component {
         address:values.address,
       }
       this.props.EditProfile(form)
-    }
-    addSeatCallback = ({ row, number, id }, addCb) => {
-      this.setState({
-        loading: true
-      }, async () => {
-        await new Promise(resolve => setTimeout(resolve, 1500))
-        console.log(`Added seat ${number}, row ${row}, id ${id}`)
-        const obj={
-          matchId_Ticket:this.state.match.Matchid,
-          userName_Ticket:this.props.userstate.userstate.username,
-          seatNumber:id,
-          staduim_Name_Ticket:this.state.match.staduim_Name_Match,
-          reserve:true
-        }
-        // alert(id)
-        this.props.ReserveOrDeleteTicket(obj)
-        const newTooltip = `tooltip for id-${id} added by callback`
-        addCb(row, number, id, newTooltip)
-        this.setState({ loading: false })
-      })
-    }
-    removeSeatCallback = ({ row, number, id }, removeCb) => {
-      this.setState({
-        loading: true
-      }, async () => {
-        await new Promise(resolve => setTimeout(resolve, 1500))
-        console.log(`Removed seat ${number}, row ${row}, id ${id}`)
-        // const obj={
-        //   matchId_Ticket:this.state.match.Matchid,
-        //   userName_Ticket:this.props.userstate.userstate.username,
-        //   seatNumber:id,
-        //   staduim_Name_Ticket:this.state.match.staduim_Name_Match,
-        //   reserve:false
-        // }
-        // this.props.ReserveOrDeleteTicket(obj)
-        // A value of null will reset the tooltip to the original while '' will hide the tooltip
-        const newTooltip = ['A', 'B', 'C'].includes(row) ? null : ''
-        removeCb(row, number, newTooltip)
-        this.setState({ loading: false })
-      })
-    }
-    handleSeatsRender(match){
-      
-      this.setState({
-        isSuccessful: true
-      },async()=>{
-        this.props.AddSingleMatch(match)
-      })
-      // alert(this.state.key)
-      // this.setState({
-      //   match:match,
-      //   load:false
-      // },async()=>
-      // {
-      //   var noOfRows=0
-      //   var noOfCols=0
-      //   this.props.staduims.staduims.map((stad)=>{
-      //     if(this.state.match.staduim_Name_Match === stad.staduimname)
-      //     {
-      //       // console.log("1")
-      //       noOfRows=stad.noOfRows
-      //       noOfCols=stad.seatsPerRow
-
-      //     }
-      //   })
-      //   var allrows = new Array(parseInt( noOfRows));
-        
-      //   for (var i = 0; i < parseInt(noOfRows); i++) {
-      //     // console.log(noOfCols)
-      //     allrows[i] = new Array(parseInt( noOfCols));
-      //     allrows[i].length=0
-      //   } 
-      //   var seatnumber=1;
-
-      //   for (let index = 0; index < parseInt(noOfRows); index++) {
-      //     for( let j =0; j < parseInt(noOfCols); j++){
-      //       // console.log("2")
-      //       allrows[index].push({id: seatnumber, number: seatnumber,isReserved:false})
-      //       seatnumber++
-      //     }
-          
-      //   }
-        
-      //   // console.log("Allrows",allrows);
-      //   this.props.tickets.tickets.map((ticket)=>{
-      //     if (this.state.match.Matchid === ticket.matchId_Ticket) {
-      //       // alert("match occur")
-      //       for (const outElem of allrows) {
-      //         // console.log('======== outter ========');
-      //         for (const inElem of outElem) {
-      //           // alert(inElem)
-      //           if (ticket.seatNumber == inElem.id ) {
-      //             // alert(true)
-      //             inElem.isReserved=true
-      //           }
-      //         }
-      //       }
-      //     }
-      //     console.log("Allrows",allrows);
-      //   })
-      //   console.log(allrows)
-      //   this.setState({
-      //     rows:allrows
-      //   })
-      // }
-
-      // )
     }
     handleCancelReservation(seatnumber,username,stad,matchid){
       const obj={
@@ -1141,35 +1006,6 @@ class Home extends Component {
                               <Accordion.Collapse eventKey="2">
                                 <Card.Body>
                                   
-                                {/* <div>  
-                                    <h1>Seat Picker</h1>
-                                    <div style={{marginTop: '100px'}}>
-                                      <button onClick={()=>this.setState({load:true})}>Load Seats</button>
-                                      <button onClick={()=>this.setState({load:false})}> Unload Seats</button>
-                                      {
-                                        this.state.load === true ?
-                                        (
-                                          <div>
-                                      <SeatPicker
-                                        addSeatCallback={this.addSeatCallback}
-                                        removeSeatCallback={this.removeSeatCallback}
-                                        rows={this.state.rows}
-                                        maxReservableSeats={3}
-                                        alpha
-                                        visible
-                                        selectedByDefault
-                                        loading={loading}
-                                        // tooltipProps={{multiline: true}}
-                                      />
-                                      </div>
-                                        ):
-                                        (
-                                          <div></div>
-                                        )
-                                      }
-                                      
-                                    </div>
-                                </div> */}
                                 </Card.Body>
                               </Accordion.Collapse>
                             </Card>
@@ -1415,7 +1251,7 @@ class Home extends Component {
                         <div className="bodyHome">
                         {this.props.isSignedIn.isSignedIn === true ? (
                           <div>
-                            {this.props.userstate.userstate.role === "0" ? 
+                            {this.props.userstate.userstate.role === "0" && this.props.userstate.userstate.admin !== "1" ? 
                             <div>  
                                 {ReservedTickets}
                                 

@@ -7,7 +7,7 @@ require("./deleteAll.php");
 require("./connection.php");
 error_reporting(E_ERROR | E_PARSE);
 
-$_REQUEST = json_decode(file_get_contents("php://input"),true);
+// $_REQUEST = json_decode(file_get_contents("php://input"),true);
 // $username=($_REQUEST['username']);
 // $password=($_REQUEST['password']);
 

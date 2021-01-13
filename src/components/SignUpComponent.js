@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import {
-  Col, Button, Row, Label, NavLink, ModalBody,Modal
+  Col, Button, Row, Label
 } from 'reactstrap';
 import {
   Control, Form, Errors,
 } from 'react-redux-form';
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import "./cssFiles/SignUp.css"
 
 const required = val => val && val.length;
@@ -14,7 +14,6 @@ const validEmail = val => /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(val);
 const validDay = val => /^([1-9]|0[1-9]|[12]\d|3[01])$/i.test(val);
 const validYear = val =>
   /^(181[2-9]|18[2-9]\d|19\d\d|2\d{3}|30[0-3]\d|304[0-8])$/i.test(val); //1812 - 3048
-const confEmail = val => val2 => val === val2;
 const typeSelected = val => val === "male" || val === "female";
 const roleSelected = val => val === "fan" || val === "manager";
 

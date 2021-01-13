@@ -18,8 +18,8 @@ export const postFeedback = (
           alert("Congratulation, now go to the Sign in Page to Sign In")
           dispatch(GetUsers());
         }
-        // else
-        //   alert(response.request.responseText)
+        else
+          alert(response.request.responseText)
       }) 
       .catch((error) => {
         console.log(error);
@@ -128,8 +128,7 @@ export const postFeedback = (
         .get(`${baseUrl}/getAllTeams.php`)
         .then((response) => {
           // alert(response.request.responseText)
-
-            // console.log(JSON.parse(response.request.responseText))
+          // console.log(JSON.parse(response.request.responseText))
           dispatch(addTeams(JSON.parse(response.request.responseText)))
       }
         )
@@ -313,7 +312,9 @@ export const postFeedback = (
         axios
             .post(`${baseUrl}/reserveTicket.php`,newFeedback)
             .then((response) => {
-              // alert(( response.request.responseText))
+              if(response.request.responseText != 1){
+                alert("Your ticket is not reserved, its already reserved by a user just before you")
+              }
               dispatch(GetTickets())
           }
             )

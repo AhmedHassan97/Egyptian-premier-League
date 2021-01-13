@@ -31,6 +31,11 @@ if ($result->num_rows > 0) {
         }
         $myJSON = json_encode($stack);
         echo $myJSON;
+  }
+  else{
+    $stack = array();
+    $myJSON = json_encode($stack);
+    echo $myJSON;
   } 
 
 ?>

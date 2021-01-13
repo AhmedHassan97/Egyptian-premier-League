@@ -23,7 +23,7 @@ if($reserve == true){
     if ($conn->query($sql) === TRUE) {
     echo true;
     } else {
-    //   echo  "This userbname already exists";
+      echo  "This ticket is already reserved";
     }
     }
     

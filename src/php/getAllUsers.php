@@ -7,8 +7,8 @@ require("./connection.php");
 error_reporting(E_ERROR | E_PARSE);
 
 $_REQUEST = json_decode(file_get_contents("php://input"),true);
-$username=($_REQUEST['username']);
-$password=($_REQUEST['password']);
+// $username=($_REQUEST['username']);
+// $password=($_REQUEST['password']);
 
 
 
@@ -42,6 +42,11 @@ if ($result->num_rows > 0) {
         }
         $myJSON = json_encode($stack);
         echo $myJSON;
+  }
+  else{
+    $stack = array();
+    $myJSON = json_encode($stack);
+    echo $myJSON;
   } 
 
 
