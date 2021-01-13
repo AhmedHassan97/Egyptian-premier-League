@@ -27,7 +27,7 @@ VALUES ('$username', '$firstname', '$lastname', '$date','$password',' $sex', '$c
 if ($conn->query($sql) === TRUE) {
   echo true;
 } else {
-  echo  "This userbname already exists";
+  echo  "This username or the email already exists";
 }
 
 

@@ -46,8 +46,6 @@ export const postFeedback = (
         } catch (error) {
           alert("Wrong username or password")
         }
-        
-     
     }
       )
       .catch((error) => {

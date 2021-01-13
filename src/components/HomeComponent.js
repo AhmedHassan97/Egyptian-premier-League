@@ -42,8 +42,10 @@ class Home extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleEditMatch = this.handleEditMatch.bind(this);
     this.handleEditProfile = this.handleEditProfile.bind(this);
+    this.handleSeatsRender = this.handleSeatsRender.bind(this);
 
     }
+  
 
     componentDidMount(){
       this.props.resetAddStadForm()
@@ -148,6 +150,45 @@ class Home extends Component {
         address:values.address,
       }
       this.props.EditProfile(form)
+    }
+    addSeatCallback = ({ row, number, id }, addCb) => {
+      this.setState({
+        loading: true
+      }, async () => {
+        await new Promise(resolve => setTimeout(resolve, 1500))
+        console.log(`Added seat ${number}, row ${row}, id ${id}`)
+        const obj={
+          matchId_Ticket:this.state.match.Matchid,
+          userName_Ticket:this.props.userstate.userstate.username,
+          seatNumber:id,
+          staduim_Name_Ticket:this.state.match.staduim_Name_Match,
+          reserve:true
+        }
+        // alert(id)
+        this.props.ReserveOrDeleteTicket(obj)
+        const newTooltip = `tooltip for id-${id} added by callback`
+        addCb(row, number, id, newTooltip)
+        this.setState({ loading: false })
+      })
+    }
+    removeSeatCallback = ({ row, number, id }, removeCb) => {
+      this.setState({
+        loading: true
+      }, async () => {
+        await new Promise(resolve => setTimeout(resolve, 1500))
+        console.log(`Removed seat ${number}, row ${row}, id ${id}`)
+        const newTooltip = ['A', 'B', 'C'].includes(row) ? null : ''
+        removeCb(row, number, newTooltip)
+        this.setState({ loading: false })
+      })
+    }
+    handleSeatsRender(match){
+      
+      this.setState({
+        isSuccessful: true
+      },async()=>{
+        this.props.AddSingleMatch(match)
+      })
     }
     handleCancelReservation(seatnumber,username,stad,matchid){
       const obj={
