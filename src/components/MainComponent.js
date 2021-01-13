@@ -89,6 +89,7 @@ class Main extends Component{
                         tickets={this.props.tickets}
                         Logout={this.props.Logout}
                         resetAddStadForm={this.props.resetAddStadForm}
+                        GetTickets={this.props.GetTickets}
 
                 />}>
 

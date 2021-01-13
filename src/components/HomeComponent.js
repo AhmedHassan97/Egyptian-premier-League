@@ -12,6 +12,9 @@ Control, Form, Errors,
 } from 'react-redux-form';
 import { Link, Redirect } from 'react-router-dom';
 import SeatPicker from 'react-seat-picker'
+import axios from "axios";
+import _ from 'lodash';
+import { baseUrl } from '../redux/baseUrl';
 
 
 const required = val => val && val.length;
@@ -26,8 +29,6 @@ const TeamSelected3 = val => val !== "null";
 const monthSelected = val => val !== "null";
 
   
-  
-  
 class Home extends Component {
     constructor(props){
         super(props);
@@ -35,7 +36,8 @@ class Home extends Component {
             key:1,
             loading:false,
             match:[],
-            rows:[]
+            rows:[],
+            time:0
         };
     this.handleSelect = this.handleSelect.bind(this);
     this.handleApproval = this.handleApproval.bind(this);
@@ -46,10 +48,33 @@ class Home extends Component {
     this.handleSeatsRender = this.handleSeatsRender.bind(this);
 
     }
+     GetTickets = (
+      )  => {
+        axios
+          .get(`${baseUrl}/getTickets.php`)
+          .then((response) => {
+            if (_.isEqual(this.props.tickets.tickets, JSON.parse( response.request.responseText))) {
+            }
+            else if(this.state.key == 2){
+              alert("Another User changed his Reservation")
+              this.props.GetTickets()
+            }
+            
+        }
+          )
+          .catch((error) => {
+            console.log(error);
+          });
+      };
+    componentWillUnmount() {
+      clearInterval(this.interval);
 
+    }
     componentDidMount()
     {
-      this.props.resetAddStadForm()
+      // this.props.resetAddStadForm()
+      this.interval = setInterval(() => this.GetTickets(), 1000);
+
     }
     handleSubmit(values) {
       // alert(values.time)
@@ -191,7 +216,7 @@ class Home extends Component {
       })
     }
     handleSeatsRender(match){
-      // alert("hellow")
+      alert(this.state.key)
       this.setState({
         match:match,
         load:false
@@ -1109,7 +1134,7 @@ class Home extends Component {
                         </Card>
                         {this.props.isSignedIn.isSignedIn === true ? (
                           <div>
-                            {this.props.userstate.userstate.role === "0" ? (
+                            {this.props.userstate.userstate.role === "0" && this.props.userstate.userstate.admin !=="1"? (
                               <Card>
                               <Card.Header>
                                 <Accordion.Toggle as={Button} variant="link" eventKey="2">
@@ -1175,7 +1200,7 @@ class Home extends Component {
         }
         else{
             AllUsers=this.props.users.users.map((user)=>{
-                if(user.admin == '0'){
+                if(user.admin == '0' && user.approved === "1"){
                     return(
                     
                         <Card className="cardPadding">
@@ -1202,7 +1227,6 @@ class Home extends Component {
              PendingUsers=this.props.users.users.map((user)=>{
                 if(user.approved == '0'){
                     return(
-                    
                         <Card className="cardPadding">
                             <Card.Header> <b>User Name:</b> {user.username}</Card.Header>
                             <Card.Body>

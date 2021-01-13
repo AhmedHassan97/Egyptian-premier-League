@@ -18,7 +18,8 @@ class Signin extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isSuccessful:false
+      isSuccessful:false,
+      submit:false
     };
     this.handleSubmit = this.handleSubmit.bind(this);
 
@@ -26,25 +27,36 @@ class Signin extends Component {
   componentDidMount(){
     this.props.resetSignInForm()
     if(this.props.isSignedIn.isSignedIn===true){
-
       this.setState({
         isSuccessful: true
       })
     }
+    
   }
+  // componentWillUnmount(){
+  //   if (this.state.submit === true && this.props.isSignedIn.isSignedIn===false) {
+  //     this.setState({
+  //       submit:false
+  //     })
+  //     alert("wrong user name or password")
+  //   }
+  // }
   handleSubmit(values) {
     // this.props.resetFeedbackForm();
-    if (
-      values.password !== "" &&
-      values.userName !== "" 
-      )
-     {
-         var signindata={
-            username:values.userName,
-            password:values.password
-         }
-         this.props.SignInAction(signindata)
-     }
+    
+      if (
+        values.password !== "" &&
+        values.userName !== "" 
+        )
+       {
+           var signindata={
+              username:values.userName,
+              password:values.password
+           }
+           this.props.SignInAction(signindata)
+       }
+
+    
     }
   render() {
     let redirect = null;
@@ -111,8 +123,7 @@ class Signin extends Component {
                     id="password"
                     name="password"
                     validators={{
-                      required,
-                      minLength: minLength(7)
+                      required
                     }}
                   />
                   <Row className="ml-2">

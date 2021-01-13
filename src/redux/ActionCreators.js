@@ -1,6 +1,7 @@
 import * as ActionTypes from "./ActionTypes";
 import { baseUrl } from './baseUrl';
 import axios from "axios";
+import _ from 'lodash';
 
 
 // /////////////////////////////////////////////////////////////////// SIGN UP /////////////////////////////////////////////////////////
@@ -29,22 +30,23 @@ export const postFeedback = (
   export const SignInAction = (
     newFeedback
   ) => (dispatch) => {
-    
     axios
       .post(`${baseUrl}/getUser.php`,newFeedback)
       .then((response) => {
-        // alert(response.request.responseText)
-        // alert(newFeedback)
+        try {
           if(JSON.parse(response.request.responseText)["approved"]==="0")
           {
             // dispatch(addUser(JSON.parse( response.request.responseText)))
-
             alert("Your Account is Not Approved Yet")
           }
           else{
             dispatch(addUser(JSON.parse( response.request.responseText)))
             console.log(JSON.parse(response.request.responseText))
-          }
+          }  
+        } catch (error) {
+          alert("Wrong username or password")
+        }
+        
      
     }
       )
@@ -255,7 +257,12 @@ export const postFeedback = (
       axios
         .get(`${baseUrl}/getTickets.php`)
         .then((response) => {
-          dispatch(addTickets(JSON.parse( response.request.responseText)))
+          // if (_.isEqual(props, JSON.parse( response.request.responseText))) {
+          // }
+          // else{
+            dispatch(addTickets(JSON.parse( response.request.responseText)))
+          // }
+          
       }
         )
         .catch((error) => {

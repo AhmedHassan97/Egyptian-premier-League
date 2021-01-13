@@ -41,7 +41,10 @@ if ($result->num_rows > 0) {
         $myJSON = json_encode($results);
         echo $myJSON;
     }
+  }  else{
+    echo "falsdasdse";
   }
+
 
 
 ?>
