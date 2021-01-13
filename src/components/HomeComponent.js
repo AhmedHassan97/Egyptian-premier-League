@@ -11,10 +11,7 @@ import {
 Control, Form, Errors,
 } from 'react-redux-form';
 import { Link, Redirect } from 'react-router-dom';
-import SeatPicker from 'react-seat-picker'
-import axios from "axios";
 import _ from 'lodash';
-import { baseUrl } from '../redux/baseUrl';
 
 
 const required = val => val && val.length;
@@ -50,6 +47,7 @@ class Home extends Component {
     componentDidMount(){
       this.props.resetAddStadForm()
       this.props.resetAddMatchForm();
+      this.props.resetEditMatchForm();
 
     }
     handleSubmit(values) {
@@ -118,18 +116,20 @@ class Home extends Component {
         hometeam: values.hometeam,
         stad: values.stad,
       }
+      alert(values.hometeam)
+      alert(values.awayteam)
       if (values.hometeam === "" && values.awayteam === "") {
         this.props.EditMatch(obj)  
         alert("valid")
       }
       else if (values.hometeam === values.awayteam) {
-        alert("invalid")
+        alert("invalid1")
       }
       else if (values.hometeam === "" && values.awayteam !== "" && oldHome === values.awayTeam) {
-        alert("invalid")
+        alert("invalid2")
       }
       else if (values.hometeam !== "" && values.awayteam === "" && oldAway === values.hometeam) {
-        alert("invalid")
+        alert("invalid3")
       }
       else{
         this.props.EditMatch(obj)  
@@ -183,12 +183,18 @@ class Home extends Component {
       })
     }
     handleSeatsRender(match){
-      
-      this.setState({
-        isSuccessful: true
-      },async()=>{
-        this.props.AddSingleMatch(match)
-      })
+      var datebig= new Date()
+      var dateSmall=  new Date(match.matchDate)
+      if (datebig > dateSmall ) {
+        alert("this match doesnt exist any more")
+      }
+      else{
+        this.setState({
+          isSuccessful: true
+        },async()=>{
+          this.props.AddSingleMatch(match)
+        })
+      }
     }
     handleCancelReservation(seatnumber,username,stad,matchid){
       const obj={
