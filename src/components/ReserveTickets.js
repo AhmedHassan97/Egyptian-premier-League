@@ -37,7 +37,6 @@ class ReserveTickets extends Component{
     this.handleSubmit=this.handleSubmit.bind(this);    
     }
     handleSubmit(){
-      alert("here 12312")
        const obj={
             matchId_Ticket:this.props.match.match.Matchid,
             userName_Ticket:this.props.userstate.userstate.username,

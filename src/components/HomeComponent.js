@@ -73,14 +73,19 @@ class Home extends Component {
     //   this.interval = setInterval(() => this.GetTickets(), 1000);
 
     // }
+    componentDidMount(){
+      this.props.resetAddStadForm()
+      this.props.resetAddMatchForm();
+
+    }
     handleSubmit(values) {
       // alert(values.time)
-      const date=new Date(values.day,values.month,values.year)
+      // const date=new Date(values.day,values.month,values.year)
       var obj={
         mainrefree:values.mainrefree,
         lineman1:values.lineman1,
         lineman2:values.lineman2,
-        date:date,
+        date:values.date,
         time:values.time,
         awayteam: values.awayteam,
         hometeam: values.hometeam,
@@ -89,9 +94,9 @@ class Home extends Component {
       this.props.postMatch(obj)
     }
     handleAddStaduim(values){
-      if (values.stadname === "" ||
-        values.app==="" ||
-        values.seatsPerRow==="" ||
+      if (values.stadname === "" &&
+        values.app==="" &&
+        values.seatsPerRow==="" &&
         values.noOfRows==="") {
        this.props.resetAddStadForm() 
       }
