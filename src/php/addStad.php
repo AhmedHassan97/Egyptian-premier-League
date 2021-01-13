@@ -23,6 +23,6 @@ if (mysqli_query($conn, $sql)) {
 } 
 else
 {
-  echo false;
+  echo "0";
 }
 ?>

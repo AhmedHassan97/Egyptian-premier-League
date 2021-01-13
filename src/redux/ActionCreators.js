@@ -170,16 +170,17 @@ export const postFeedback = (
     newFeedback
   ) => (dispatch) => {
     console.log(newFeedback)
-    dispatch(matchesLoading());
+    
     axios
       .post(`${baseUrl}/addMatch.php`,newFeedback)
       .then((response) => {
           if (response.request.responseText != true){
             alert("You cant choose the away team and the home team the same")
-            dispatch(GetMatches());  
+            // dispatch(GetMatches());  
           }
           else{
             alert("Match added Successfuly")
+            dispatch(matchesLoading());
             dispatch(GetMatches());
           }
            
@@ -194,10 +195,17 @@ export const postFeedback = (
       newFeedback
     ) => (dispatch) => {
       console.log(newFeedback)
-      dispatch(stadLoading(true));
       axios
         .post(`${baseUrl}/addStad.php`,newFeedback)
-        .then((response) => { dispatch(GetStaduims());  
+        .then((response) => { 
+          if (response.request.responseText === "0") {
+            alert("This staduim already exist")
+          }
+          else{
+            dispatch(stadLoading(true));
+            dispatch(GetStaduims());  
+
+          }
           // alert(response.request.responseText)  
 
         }) 
@@ -214,7 +222,7 @@ export const postFeedback = (
     axios
       .post(`${baseUrl}/alterMatch.php`,newFeedback)
       .then((response) => {
-          //  alert(response.request.responseText)  
+           console.log(response.request.responseText)  
            dispatch(GetMatches())       
            
       }) 

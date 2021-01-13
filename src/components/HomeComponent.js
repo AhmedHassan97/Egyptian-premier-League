@@ -116,20 +116,19 @@ class Home extends Component {
         hometeam: values.hometeam,
         stad: values.stad,
       }
-      alert(values.hometeam)
-      alert(values.awayteam)
       if (values.hometeam === "" && values.awayteam === "") {
         this.props.EditMatch(obj)  
         alert("valid")
       }
       else if (values.hometeam === values.awayteam) {
-        alert("invalid1")
+        alert("invalid")
       }
-      else if (values.hometeam === "" && values.awayteam !== "" && oldHome === values.awayTeam) {
-        alert("invalid2")
-      }
+     
       else if (values.hometeam !== "" && values.awayteam === "" && oldAway === values.hometeam) {
-        alert("invalid3")
+        alert("invalid")
+      }
+      else if (values.hometeam === "" && values.awayteam !== "" && oldHome === values.awayteam) {
+        alert("invalid")
       }
       else{
         this.props.EditMatch(obj)  

@@ -13,22 +13,22 @@ $id=($_REQUEST['id']);
 $homeTeam=($_REQUEST['hometeam']);
 $awayTeam=($_REQUEST['awayteam']);
 
-if($homeTeam !== "" && $awayTeam !== "")
+if($homeTeam !== "")
 {
-    $sql = "UPDATE matches SET homeTeam= '$homeTeam', awayTeam= '$awayTeam' WHERE Matchid='$id'" ;
+    $sql = "UPDATE matches SET homeTeam= '$homeTeam' WHERE Matchid='$id'" ;
     if ($conn->query($sql) === TRUE) {
         echo true;
       } 
 }
-    
 
-// if($awayTeam !== "")
-// {
-//     $sql = "UPDATE matches SET awayTeam= '$awayTeam' WHERE Matchid='$id'";    
-//     if ($conn->query($sql) === TRUE) {
-//         echo true;
-//       } }
-
+if($awayTeam !== "")
+{
+    $sql = "UPDATE matches SET awayTeam= '$awayTeam' WHERE Matchid='$id'" ;
+    if ($conn->query($sql) === TRUE) {
+        echo true;
+      } 
+}
+         
 $staduim_Name_Match=($_REQUEST['stad']);
 if($staduim_Name_Match !== "")
 {
