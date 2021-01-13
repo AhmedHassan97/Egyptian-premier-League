@@ -18,12 +18,10 @@ $result = $conn->query($sql);
 
 
 if ($result->num_rows > 0) {
-    // output data of each row
     $stack = array();
 ;
     while ($row = $result->fetch_assoc()) {
-        // $myObj->name = $row['username'];
-        // $myObj->age = $row['pass'];
+       
         $results = array(
             'Ticketid' => $row['Ticketid'],
             'matchId_Ticket'=>$row['matchId_Ticket'],

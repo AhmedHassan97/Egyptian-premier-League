@@ -15,7 +15,6 @@ $seats=($_REQUEST['seats']);
 $staduim_Name_Ticket=($_REQUEST['staduim_Name_Ticket']);
 $reserve=($_REQUEST['reserve']);
 if($reserve == true){    
-    // echo "here";
     foreach ($seats as $seat){
         $sql = "INSERT INTO ticketsreservation (matchId_Ticket, userName_Ticket, seatNumber, staduim_Name_Ticket)
     VALUES ('$matchId_Ticket', '$userName_Ticket', '$seat','$staduim_Name_Ticket') 

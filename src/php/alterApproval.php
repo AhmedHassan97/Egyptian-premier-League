@@ -22,9 +22,7 @@ else{
 if ($conn->query($sql) === TRUE) {
   echo true;
 } 
-// else {
-//   echo  "This userbname already exists";
-// }
+
 
 
 ?>

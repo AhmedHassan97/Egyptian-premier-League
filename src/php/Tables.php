@@ -1,7 +1,6 @@
 <?php
     require("./connection.php");
 // -----------------------------------------------------USERS--------------------------------------
-    // sql to create table
     $sql = "CREATE TABLE Users (
     username VARCHAR(30) NOT NULL PRIMARY KEY,
     firstname VARCHAR(30) NOT NULL,
@@ -88,5 +87,4 @@
     echo "Error creating table: " . $conn->error;
     }
     
-    // $conn->close();
 ?>
