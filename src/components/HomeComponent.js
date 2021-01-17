@@ -201,7 +201,7 @@ class Home extends Component {
           userName_Ticket:username,
           seatNumber:seatnumber,
           staduim_Name_Ticket:stad,
-          reserve:false,
+          reserve:true,
           delete:true
         }
         this.props.ReserveOrDeleteTicket(obj)

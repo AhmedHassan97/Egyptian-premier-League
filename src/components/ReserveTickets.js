@@ -29,7 +29,6 @@ class ReserveTickets extends Component{
             totalCost:0,
             seats:[],
             tickets:this.props.tickets.tickets
-            
         };
     // this.handleSelect = this.handleSelect.bind(this);
     this.handleSeatsRender = this.handleSeatsRender.bind(this);

@@ -108,6 +108,7 @@ class Main extends Component{
                 />}>
 
             </Route>
+            
             <Route exact path="/reserve" component={()=>
                 <ReserveTickets isSignedIn={this.props.isSignedIn}
                                 userstate={this.props.userstate}

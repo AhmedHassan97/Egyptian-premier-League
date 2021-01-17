@@ -60,7 +60,7 @@ class SignUp extends Component {
          username:values.userName,
          date:date,
          sex:values.sex,
-         role: (values.role == "fan" ? 1:0),
+         role: (values.role == "fan" ? 0:1),
          city:values.city,
          address:values.address,
          approved:false

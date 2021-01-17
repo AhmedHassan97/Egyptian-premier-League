@@ -284,7 +284,7 @@ export const postFeedback = (
 /////////////////////////////////////////////////////////////////////Reserve or Delete Tickets/////////////////////////////////////////////////
   export const ReserveOrDeleteTicket = (
     newFeedback) => (dispatch) => {
-      if (newFeedback.delete===true) {
+      if (newFeedback.delete ===true) {
         axios
         .post(`${baseUrl}/getMatch.php`,newFeedback)
         .then((response) => {
@@ -292,7 +292,7 @@ export const postFeedback = (
           var dateSmall= new Date()
           var datebig=  new Date(JSON.parse(response.request.responseText)[0].matchDate)
           
-          if(Math.floor((dateSmall-datebig)/ (1000 * 3600 * 24)) > 3)
+          if(( Math.floor((dateSmall-datebig))/ (1000 * 3600 * 24)) < 3)
           {
             axios
             .post(`${baseUrl}/reserveTicket.php`,newFeedback)
